@@ -6,12 +6,19 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/ranking';
 function Lobby({ onJoin, players }) {
     const [username, setUsername] = useState(localStorage.getItem('tetris_username') || '');
     const [rankings, setRankings] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         // Load rankings
         axios.get(API_URL)
-            .then(res => setRankings(res.data))
-            .catch(err => console.error("Error loading rankings:", err));
+            .then(res => {
+                setRankings(res.data);
+                setError(null);
+            })
+            .catch(err => {
+                console.error("Error loading rankings:", err);
+                setError("Failed to load rankings. Check console.");
+            });
     }, []);
 
     const handleJoin = (e) => {
@@ -56,6 +63,8 @@ function Lobby({ onJoin, players }) {
 
                 <div className="rankings-list">
                     <h3>🏆 Top Rankings</h3>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    {!error && rankings.length === 0 && <p>No rankings yet.</p>}
                     <table>
                         <thead>
                             <tr>
