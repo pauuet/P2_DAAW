@@ -6,7 +6,7 @@ import { ref, set, onValue, push, update, remove, onDisconnect, get } from "fire
 import axios from "axios";
 
 // Use Environment Variable or fallback to localhost
-const API_URL = import.meta.env.VITE_API_URL || 'https://tetris-backend-0qra.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://tetris-backend-0qra.onrender.com/ranking';
 
 function App() {
   const [gameState, setGameState] = useState('lobby'); // lobby, playing, gameover, waiting

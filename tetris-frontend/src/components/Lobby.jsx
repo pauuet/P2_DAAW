@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://tetris-backend-0qra.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://tetris-backend-0qra.onrender.com/ranking';
 
 function Lobby({ onJoin, players }) {
     const [username, setUsername] = useState(localStorage.getItem('tetris_username') || '');
